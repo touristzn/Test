@@ -1,0 +1,20 @@
+@import '../../static/less/mixin.less';
+@import '../../static/less/variable.less';
+
+header {
+  width:100%;
+  .pos(f);
+  z-index: 10;
+  ul {
+    li {
+      padding-right: 10px;
+      .d-ib;
+      &:last-child {
+        padding-right: 0;
+      }
+      a.active {
+        color:@color-theme;
+      }
+    }
+  }
+}

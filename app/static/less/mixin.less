@@ -1,0 +1,339 @@
+// * 浮动
+.fl(@f:left;){
+    float: @f;
+    display: inline;
+}
+.fr(@f:right){
+  float: @f;
+  display: inline;
+}
+
+// * 定位
+.pos(r) {
+  position: relative;
+}
+.pos(a) {
+  position: absolute;
+}
+.pos(f) {
+  position: fixed;
+}
+.pos(s) {
+  position: static;;
+}
+
+// * 定位居中
+.pos-box-cc(@w,@h,@pos) {  //适用于有固定宽高
+  width: @w;
+  height: @h;
+  position: @pos;
+  left: 50%;
+  top: 50%;
+  margin-left: -@w / 2;
+  margin-top: -@h / 2;
+}
+.pos-box-h() {  //适用于无固定高
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+}
+.pos-box-w() {  //适用于无固定宽
+  left: 50%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+}
+.pos-box-wh() {  //适用于无固定宽高
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+
+// * 布局
+.hc() {
+  margin-left: auto;
+  margin-right: auto;
+}
+.hc-d(@w:500px) {
+  width: @w;
+  .hc();
+}
+.wh-same(@w) {
+  width: @w;
+  height: @w;
+}
+.wh-unlike(@w,@h) {
+  width: @w;
+  height: @h;
+}
+
+.z-index(@index:1){
+  z-index: @index;
+}
+
+// * 高度100%
+.h100(){
+  height: 100%;
+}
+// * 文字垂直居中
+.txt-ver(@h){
+  height: @h;
+  line-height: @h;
+}
+
+// * tc 背景覆盖的位置
+.text-a(@position) {
+    text-align: @position;
+}
+
+// * display
+.d-b() {
+  display: block;
+}
+.d-i() {
+  display: inline;
+}
+.d-ib() {
+  display: inline-block;
+}
+.d-n() {
+  display: none;
+}
+.hide() {
+  display: none;
+}
+.d-t() {
+  width:100%;
+  display:table;
+}
+.d-tr() {
+    display:table-row;
+}
+.d-tc() {
+    display:table-cell;
+}
+.d-flex() {
+  display: flex;
+  justify-content: space-between;
+}
+
+// * 添加下划线
+.tu(){
+  text-decoration: underline;
+}
+.tn(){
+  text-decoration: none;
+}
+
+// * background 背景图
+.background(@img) {
+    background: url(@img) no-repeat;
+}
+
+
+// * background-clip 背景覆盖的位置
+.background-clip(@background-clip: border-box){
+    background-clip: @background-clip;
+}
+
+// * background-origin 背景开始的位置
+.background-origin(@background-origin: padding-box){
+    background-origin: @background-origin;
+}
+
+
+// * 背景色透明 rgba
+.background-rgba(@red, @green, @blue, @alpha:1){
+                @filtercolor:`(_f = function(d){ var v = (parseInt(d)|0).toString(16);return v.length<2 ? "0"+v : v;},
+                                                '#'+_f(@{alpha}*255) + _f(@{red}) + _f(@{green})+ _f(@{blue}))`;
+                
+                background-color: ~'rgba(@{red},@{green},@{blue},@{alpha})';
+    -ms-filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{filtercolor}',endColorstr='@{filtercolor}')";
+    filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{filtercolor}',endColorstr='@{filtercolor}')";        
+}
+
+// * background-size 背景尺寸
+.background-size(@background-size: auto){
+    background-size: @background-size;
+}
+
+// * border-image
+.border-image(@url, @width, @repeat){
+    border: '@{width} solid transparent';
+    border-image:'url(@{url}) @width @width @repeat';
+}
+
+// * border-radius
+.border-radius(@radius: 5px) {
+    border-radius: @radius;
+}
+
+// * 最小和最大宽高
+.min-width(@width){
+  min-width: @width;
+  _width:@width;
+}
+.max-width(@width,@id){
+  max-width: @width;
+  _width:~'expression(document.getElementById("@{id}").offsetHeight>parseInt("@{width}")?"@{width}": "auto")';
+  overflow:hidden;
+}
+.min-height(@height){
+  min-height: @height;
+  _height:@height;
+}
+.max-height(@height,@id){
+  max-height: @height;
+  _height:~'expression(document.getElementById("@{id}").offsetHeight>parseInt("@{height}")?"@{height}": "auto")';
+  overflow:hidden;
+}
+
+//单角
+.border-top-left-radius(@radius: 5px) {
+    border-top-left-radius: @radius;
+}
+.border-top-right-radius(@radius: 5px) {
+    border-top-right-radius: @radius;
+}
+.border-bottom-right-radius(@radius: 5px) {
+    border-bottom-right-radius: @radius;
+}
+.border-bottom-left-radius(@radius: 5px) {
+    border-bottom-left-radius: @radius;
+}
+
+//单边
+.border-top-radius(@radius: 5px) {
+  .border-top-right-radius(@radius);
+  .border-top-left-radius(@radius);
+}
+.border-right-radius(@radius: 5px) {
+  .border-top-right-radius(@radius);
+  .border-bottom-right-radius(@radius);
+}
+.border-bottom-radius(@radius: 5px) {
+  .border-bottom-right-radius(@radius);
+  .border-bottom-left-radius(@radius);
+}
+.border-left-radius(@radius: 5px) {
+  .border-top-left-radius(@radius);
+  .border-bottom-left-radius(@radius);
+}
+
+// * border-shadow
+.box-shadow(@shadow: 0px 0px 5px #ccc) {
+    box-shadow: @shadow;
+}
+
+// * box-sizing 盒模型计算方式
+.box-sizing(@boxmodel: border-box) {
+    box-sizing: @boxmodel;
+}
+
+// * column-count
+.content-columns(@columnCount, @columnGap: @gridGutterWidth) {
+    column-count: @columnCount;
+    column-gap: @columnGap;
+}
+
+// * font-face 自定义字体
+.font-face(@path, @font-name){
+        @font-face{
+                font-family: @font-name;
+                src: url('@path/@{font-name}.eot'); /* IE9 Compat Modes */
+                src: url('@path/@{font-name}.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+                     url('@path/@{font-name}.woff') format('woff'), /* Modern Browsers */
+                     url('@path/@{font-name}.ttf')  format('truetype'), /* Safari, Android, iOS */
+                     url('@path/@{font-name}.svg#svgFontName') format('svg'); /* Legacy iOS */
+        }
+}
+
+// * hyphens
+// * 单词本身长度超出容器宽度时强制换行，hyphens会给断行的英文中间加上横杠
+// * 要想兼容页面编码需要写成<html lang="en-US">
+.hyphens(@mode: auto) {
+    word-wrap: break-word;
+    hyphens: @mode;
+}
+
+// * 渐变背景
+.linear-gradient(@startColor,@endColor){
+    @argbStartColor:argb(@startColor);
+    @argbEndColor:argb(@endColor);
+
+    background-image: linear-gradient(top, @startColor, @endColor);
+    filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr=@{argbStartColor},endColors=@{argbEndColor})";
+}
+
+// * opacity
+.opacity(@opacity: 80) {
+    opacity: @opacity / 100;
+    filter: ~"alpha(opacity=@{opacity})";
+}
+
+// * text-shadow
+.text-shadow(@shadow: 0px 0px 2px #333){
+    text-shadow: @shadow;
+}
+
+
+// --------------------------------- transformation ---------------------------- //
+
+//旋转
+.rotate(@degrees: 0deg) {
+    transform: rotate(@degrees);
+}
+.rotate3d(@x: 0, @y: 0, @z: 0, @degrees: 0deg){
+    transform: rotate3d(@arguments);
+}
+.rotateX(@degrees: 0deg){
+    transform: rotateX(@arguments);
+}
+.rotateY(@degrees: 0deg){
+    transform: rotateY(@arguments);
+}
+.rotateZ(@degrees: 0deg){
+    transform: rotateZ(@arguments);
+}
+
+//缩放
+.scale(@x:0, @y:0) {
+    transform: scaleX(@x) scaleY(@y);
+}
+.scaleX(@x: 0) {
+    transform: scaleX(@arguments);
+}
+.scaleY(@y: 0) {
+    transform: scaleY(@arguments);
+}
+
+//重定位元素
+.translate(@x: 0px, @y: 0px) {
+    transform: translate(@arguments);
+}
+.translate3d(@x: 0px, @y: 0px, @z: 0px) {
+    transform: translate3d(@arguments);
+}
+.translateX(@x: 0px){
+    transform: translateX(@x);
+}
+.translateY(@y: 0px){
+    transform: translateY(@y);
+}
+.translateZ(@z: 0px){
+    transform: translateZ(@z);
+}
+
+//倾斜
+.skew(@x: 0deg, @y: 0deg) {
+    transform: skew(@arguments);
+    backface-visibility: hidden;
+}
+.skewX(@x: 0deg) {
+    transform: skewX(@x);
+    backface-visibility: hidden;
+}
+.skewY(@y: 0deg) {
+    transform: skewY(@y);
+    backface-visibility: hidden;
+}
