@@ -1,7 +1,6 @@
 ## 命令行
 
 - 安装依赖：`npm install`
-- 安装插件：`npm run dll`
 - 本地开发：`npm run dev`
 - 发布发生：`npm run prod`
 
@@ -20,7 +19,6 @@
   | |
   | |----components: 基础组件
   | |----containers: 页面
-  | |----dll: 第三方库
   | |----entry: 入口js
   | |----fetch: 封装异步请求
   | |----router: 路由配置
