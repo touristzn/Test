@@ -8,6 +8,7 @@ const proxy = require('koa-proxy')
 const connectHistory = require('koa-connect-history-api-fallback')
 
 const config = require('../config/server/env.conf');
+const define = require('../config/define.conf');
 
 const NODE_ENV = process.env.NODE_ENV;
 const isDev = NODE_ENV !== 'production';
@@ -26,7 +27,7 @@ if (NODE_ENV === 'development') {
 if (isDev) {
   const webpack = require('webpack');
   const { devMiddleware, hotMiddleware } = require('koa-webpack-middleware')
-  const webpackConfig = require('../config/webpack.dev.config');
+  const webpackConfig = require('../build/webpack.dev.config');
   const compiler = webpack(webpackConfig);
 
   Object.keys(webpackConfig.entry).forEach(function (key) {
@@ -53,7 +54,7 @@ app.use(views(path.join(__dirname, '../dist'), {
 
 //请求代理
 app.use(proxy({
-  host: 'https://c.y.qq.com',
+  host: define.API_BASEURL,
   match: /^\/api\//,
   map: function (path) {
     return path.replace('/api', '')
@@ -75,4 +76,4 @@ if (NODE_ENV !== 'development') {
 
 // 开启监听服务
 const server = app.listen(config.port);
-console.log(`=====server listen on: ${config.port}=====`);
+console.log(`Please visit http://127.0.0.1:${config.port}`);

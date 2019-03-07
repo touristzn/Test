@@ -3,7 +3,7 @@ const merge = require('webpack-merge')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const CleanWebpack = require('clean-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const baseWebpackConfig = require('./webpack.base.config')
 
 const path = require('path')
@@ -65,7 +65,9 @@ module.exports = merge(baseWebpackConfig, {
     }),
 
     new webpack.NoEmitOnErrorsPlugin(),
-    new CleanWebpack(path.resolve(__dirname, 'dist')),
+    new CleanWebpackPlugin(['dist'],{
+      root: path.resolve(__dirname, '../'),
+   }),
 
     new ExtractTextPlugin({
       filename: 'css/[name].[contentHash:5].css',

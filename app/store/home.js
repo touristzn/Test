@@ -1,6 +1,6 @@
 import 'babel-polyfill'   //使用async语法
 import { observable, autorun, action, useStrict, runInAction } from 'mobx'
-import fetch from '../fetch'
+import fetch from '../request/agent'
 
 useStrict(true);
 

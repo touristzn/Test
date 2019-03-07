@@ -58,6 +58,7 @@ module.exports = {
 
       {
         test: /\.(jpe?g|png|gif)(\?.*)?$/,
+        include: [resolve('app/static')],
         use: [
           {
             loader: 'url-loader',
@@ -144,8 +145,8 @@ function getEntry() {
       //生成页面
       htmlPlugins.push(
         new HtmlWebpackPlugin({
-          filename: name + '.html',
-          template: './views/index.html',
+          filename: `${name}.html`,
+          template: `./app/template/${name}.ejs`,
           inject: true,
           chunksSortMode: 'dependency'
         })
