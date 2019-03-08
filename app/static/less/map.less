@@ -1,0 +1,297 @@
+//颜色配置
+/***********************************************************/
+@base:#000;  //基础色
+@colours-text:#4BC8D1;   //蓝绿色文字
+@colours-block:#75D4DA;  //蓝绿色色块
+@red-text:#FF0000;  //红色文字
+@red-block:#FF5038; //红色色块
+@gray-text-a:#8E8E93; //二级文字颜色
+@gray-text-b:#C7C7CC; //三级文字颜色，如说明文字
+@gray-text-c:#D1D1D6; //未选中状态文字 白色背景上的说明文字
+@gray-bg:#F6F6F6; //灰色背景
+@gray-block:#EFEFF4;  //灰色底框和色块
+@white:#FFF;
+@hr:#E5E5EA; //分割线
+@bg-green:#01BD01; //微信
+@bg-blue:#009CE3; //支付宝
+
+//左右边距
+/***********************************************************/
+@boxPad:1.5rem;
+
+//适配PC
+/***********************************************************/
+@pcW:600px;
+
+/***********************************************************/
+.hc() {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wh-unlike(@w,@h) {
+  width: @w;
+  height: @h;
+}
+.wh-same(@w) {
+  width: @w;
+  height: @w;
+}
+
+//内边距
+.boxPad(){
+  padding-left: @boxPad;
+  padding-right: @boxPad;
+  padding-top: @boxPad;
+  padding-bottom: @boxPad;
+}
+
+//浮动
+.fl() {
+    float:left;
+}
+.fr() {
+  float:right;
+}
+.fn() {
+  float:none;
+}
+//清除浮动
+.clearfix() {
+  overflow: hidden;
+  zoom:1;
+}
+
+//定位
+.pos(r) {
+  position: relative;
+}
+.pos(a) {
+  position: absolute;
+}
+.pos(f) {
+  position: fixed;
+}
+.pos(s) {
+  position: static;;
+}
+
+//定位居中
+.pos-box-cc(@w,@h,@pos) {  //适用于有固定宽高
+  width: @w;
+  height: @h;
+  position: @pos;
+  left: 50%;
+  top: 50%;
+  margin-left: -@w / 2;
+  margin-top: -@h / 2;
+}
+.pos-box-h() {  //适用于无固定高
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+}
+.pos-box-w() {  //适用于无固定宽
+  left: 50%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+}
+.pos-box-wh() {  //适用于无固定宽高
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+.center() {
+  .pos(a);
+  .pos-box-wh();
+}
+
+//垂直居中
+.text-vc(@h) {
+  height: @h;
+  line-height: @h;
+}
+.va(@c:middle) {
+    vertical-align:@c;
+}
+//水平居中
+.pos-c {
+  .d-ib;
+  .pos(r);
+  left:50%;
+  transform:translateX(-50%);
+}
+
+//display
+.d-b() {
+  display: block;
+}
+.d-i() {
+  display: inline;
+}
+.d-ib() {
+  display: inline-block;
+}
+.d-n() {
+  display: none;
+}
+.hide() {
+  display: none!important;
+}
+.d-t() {
+  width:100%;
+  display:table;
+}
+.d-tr() {
+    display:table-row;
+}
+.d-tc() {
+    display:table-cell;
+}
+.d-flex() {
+  display: flex;
+  justify-content: space-between;
+}
+
+//backgroud
+.bg(@url) {
+  background: url(@url) no-repeat;
+}
+.bgc(@c) {
+  background-color:@c;
+}
+.bg-m(@url,@x:0,@y:0,@repeat:no-repeat) {
+  background: url(@url) @x @y @repeat;
+}
+.bgi-i(@url) {
+  background-image:url(@url);
+}
+.bgi(@url) {
+  background-image:url(@url),none;
+}
+.bgp(@x:0,@y:0) {
+  background-position: @x @y;
+}
+.bgr-r() {
+  background-repeat: repeat;
+}
+.bgr-x() {
+  background-repeat: repeat-x;
+}
+.bgr-y() {
+  background-repeat: repeat-y;
+}
+.bgr-no() {
+  background-repeat: no-repeat;
+}
+.bga-fix() {
+  background-attachment: fixed;
+}
+.bgs(@x,@y) {
+    background-size:@x @y;
+}
+
+.forbidscroll() {
+  height:100%;
+  overflow:hidden;
+}
+
+//text
+.td(@p: none) {
+  text-decoration: @p;
+}
+.tl() {
+  text-align: left;
+}
+.tc() {
+  text-align: center;
+}
+.tr() {
+  text-align: right;
+}
+.t-lf() {
+  word-wrap: break-word;
+  word-break: normal;
+}
+
+//border
+.bor(@c) {
+    border:solid 1px @c;
+}
+.bor-t(@c) {
+    border-top:solid 1px @c;
+}
+.bor-b(@c) {
+    border-bottom:solid 1px @c;
+}
+.bor-l(@c) {
+    border-left:solid 1px @c;
+}
+.bor-r(@c) {
+    border-right:solid 1px @c;
+}
+//box-shadow
+.box-shadow(@shadow) {
+  box-shadow: @shadow;
+}
+//text-shadow
+.text-shadow(@shadow){
+  text-shadow: @shadow;
+}
+
+//透明度
+.opa(@opacity) {
+  opacity:@opacity / 100;
+  filter: ~"alpha(opacity=@{opacity})";
+}
+.rgba(@red, @green, @blue, @alpha:1){
+        @filtercolor:`(_f = function(d){ var v = (parseInt(d)|0).toString(16);return v.length<2 ? "0"+v : v;},
+                                        '#'+_f(@{alpha}*255) + _f(@{red}) + _f(@{green})+ _f(@{blue}))`;
+
+        background-color: ~'rgba(@{red},@{green},@{blue},@{alpha})';
+        -ms-filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{filtercolor}',endColorstr='@{filtercolor}')";
+        filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{filtercolor}',endColorstr='@{filtercolor}')";
+}
+
+//三角
+.triangle-b(@w:5px,@color:#ccc){
+  border-style:solid dashed dashed dashed;
+  border-color:@color transparent transparent transparent;
+  border-width:@w;
+}
+.triangle-l(@w:5px,@color:#ccc){
+  border-style:dashed solid dashed dashed;
+  border-color:transparent @color transparent transparent;
+  border-width:@w;
+}
+.triangle-t(@w:5px,@color:#ccc){
+  border-style:dashed dashed solid dashed;
+  border-color:transparent transparent @color transparent;
+  border-width:@w;
+}
+.triangle-r(@w:5px,@color:#ccc){
+  border-style:dashed dashed dashed solid;
+  border-color:transparent transparent transparent @color;
+  border-width:@w;
+}
+
+//文字省略号
+// @substract单位为%
+.ellipsis-basic() {
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  -o-text-overflow:ellipsis;
+  overflow:hidden;
+}
+.ellipsis-line(@line) {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @line;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ellipsis(@substract:0) {
+  .ellipsis-basic();
+  width:100% - @substract;
+}

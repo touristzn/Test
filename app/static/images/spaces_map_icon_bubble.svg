@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>spaces_map_icon_bubble</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M20,40 C21.5844433,37.2547757 22.7553744,35.8072461 23.5127932,35.6574114 C24.6832728,35.4258639 25.8129495,35.0808377 26.8898814,34.6342748 C29.0899648,33.7219833 31.0699174,32.3859267 32.7279221,30.7279221 C35.9852814,27.4705627 38,22.9705627 38,18 C38,8.0588745 29.9411255,0 20,0 C10.0588745,0 2,8.0588745 2,18 C2,22.9705627 4.01471863,27.4705627 7.27207794,30.7279221 C8.93008258,32.3859267 10.9100352,33.7219833 13.1101186,34.6342748 C14.1870505,35.0808377 15.3167272,35.4258639 16.4872068,35.6574114 C17.2446256,35.8072461 18.4155567,37.2547757 20,40 Z" id="path-1"></path>
+        <filter x="-19.4%" y="-12.5%" width="138.9%" height="135.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.556862745   0 0 0 0 0.556862745   0 0 0 0 0.576470588  0 0 0 0.4 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="spaces_map_icon_bubble">
+            <g>
+                <rect id="Rectangle-9" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="40" height="40"></rect>
+                <g id="Oval-4">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <circle id="Oval" fill="#000000" cx="20" cy="18" r="15"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
