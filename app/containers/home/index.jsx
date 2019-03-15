@@ -1,4 +1,5 @@
 import { observer, inject } from 'mobx-react'
+import pureRender from "pure-render-decorator"
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
@@ -6,6 +7,7 @@ import Loading from '../../components/loading'
 
 /*此处的名字home对应store文件夹下index.js中创建实例时定义的名字*/
 @inject('home')
+@pureRender  // 避免组件重复渲染
 @observer
 export default class extends React.Component {
   render() {

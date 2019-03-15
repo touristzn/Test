@@ -20,7 +20,7 @@ module.exports = merge(baseWebpackConfig, {
               ident: 'postcss',
               sourceMap: true,
               plugins: [
-                require('postcss-cssnext')()
+                require('postcss-preset-env')()
               ]
             }
           },
