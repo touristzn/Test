@@ -1,6 +1,24 @@
 import axios from 'axios';
 import qs from 'qs';
 
+// 多次请求时取消上一次请求
+let pending = [];
+const cancelPending = (config) => {
+  if(config && pending.length > 0) {
+    pending.forEach((item, index) => {
+      if (item.url === config.url) {
+        item.Cancel() // 取消请求
+        pending.splice(index, 1) // 移除当前请求记录
+      };
+    })
+  } else {
+    pending.push({
+      url: config.url,
+    })
+  }
+}
+
+// 创建实例
 const instance = axios.create({
   // baseURL: API_BASEURL,
   timeout: 5000,
@@ -15,6 +33,8 @@ instance.interceptors.request.use(
       config.withCredentials = true;
       config.headers.Authorization = token;
     }
+
+    cancelPending(config);
 
     // 请求参数序列化
     if (config.method === 'post' || config.method === "put" || config.method === "delete") {

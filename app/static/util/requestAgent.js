@@ -1,5 +1,22 @@
 import superagent from 'superagent';
 
+// 多次请求时取消上一次请求
+let pending = [];
+const cancelPending = (config) => {
+  if(config && pending.length > 0) {
+    pending.forEach((item, index) => {
+      if (item.url === config.url) {
+        item.sort() // 取消请求
+        pending.splice(index, 1) // 移除当前请求记录
+      };
+    })
+  } else {
+    pending.push({
+      url: config.url,
+    })
+  }
+}
+
 const apiAgent = superagent
   .agent()
   // 判断响应是否是错误
@@ -13,6 +30,8 @@ const apiAgent = superagent
     // set headers
     const token = localStorage.getItem("token");
     if(token) request.set('Authorization', token);
+
+    cancelPending(request);
 
     return request;
   })
