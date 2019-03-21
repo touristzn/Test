@@ -18,7 +18,7 @@ const currentReq = (config) =>{
 }
 // 中断重复的请求，并从队列中移除
 const removeQueue = (config) => {
-  for(let i=0, size = queue.length; i < size; i++){
+  for (let i = 0, size = queue.length; i < size; i += 1) {
     const task = queue[i];
     if(task.req === currentReq(config)) {
       task.cancel();
@@ -48,7 +48,7 @@ instance.interceptors.request.use(
     if (config.method === 'post' || config.method === "put" || config.method === "delete") {
         config.data = qs.stringify(config.data)
     }
-
+ 
     return config
   },
   error => {
@@ -62,13 +62,13 @@ instance.interceptors.response.use(
     if (response.status === 200) {
         // 在请求完成后，自动移出队列
         removeQueue(response.config);
-        
+
         return Promise.resolve(response);
     }
 
     return Promise.reject(response);
   },
-  (error) => {
+  error => {
     // 根据返回的状态码相应操作，如错误提示等等
     // switch (error.response.status) {
     //   case 401:
@@ -79,6 +79,7 @@ instance.interceptors.response.use(
     //       break;
     //   default: console.log(error.response.data.message);
     // }
+
     return Promise.reject(error);
   },
 )

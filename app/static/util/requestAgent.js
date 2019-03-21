@@ -4,7 +4,7 @@ import superagent from 'superagent';
 let queue = [];
 // 中断重复的请求，并从队列中移除
 const removeQueue = (config) => {
-  for(let i=0, size = queue.length; i < size; i++){
+  for (let i = 0, size = queue.length; i < size; i += 1) {
     const task = queue[i];
     const taskUrl = task.url;
     const taskMethod = task.method;
