@@ -1,6 +1,6 @@
 import 'babel-polyfill'   //使用async语法
 import { observable, autorun, action, useStrict, runInAction } from 'mobx'
-import fetch from '../request/agent'
+import { fetch } from '../request/agent'
 
 useStrict(true);
 
@@ -24,7 +24,7 @@ export default class Home {
   async getBanners() {
     if (this.loading) return;
     this.init();
-    const url = '/api/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
+    
     const param = {
       platform: 'h5',
       uin: 0,
@@ -33,7 +33,7 @@ export default class Home {
 
     try {
       this.setLoading(true);
-      const { data } = await fetch(url, param);
+      const { data } = await fetch(param);
 
       runInAction(() => {
         this.banners = data.slider;

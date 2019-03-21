@@ -8,8 +8,10 @@ const commonParams = {
   format: 'json'
 }
 
-export default async function fetch(url, options) {
+export async function fetch(options) {
+  const url = '/api/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
   const data = Object.assign({}, commonParams, options)
   const response = await agent.get(url, data);
   return response.body || JSON.parse(response.text);
 }
+

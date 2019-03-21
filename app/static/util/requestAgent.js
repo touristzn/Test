@@ -1,19 +1,20 @@
 import superagent from 'superagent';
 
-// 多次请求时取消上一次请求
-let pending = [];
-const cancelPending = (config) => {
-  if(config && pending.length > 0) {
-    pending.forEach((item, index) => {
-      if (item.url === config.url) {
-        item.sort() // 取消请求
-        pending.splice(index, 1) // 移除当前请求记录
-      };
-    })
-  } else {
-    pending.push({
-      url: config.url,
-    })
+// 请求队列
+let queue = [];
+// 中断重复的请求，并从队列中移除
+const removeQueue = (config) => {
+  for(let i=0, size = queue.length; i < size; i++){
+    const task = queue[i];
+    const taskUrl = task.url;
+    const taskMethod = task.method;
+    const configUrl = config.url;
+    const configMethod = config.method;
+
+    if(taskUrl === configUrl && taskMethod === configMethod) {
+      task.abort();
+      queue.splice(i, 1);
+    }
   }
 }
 
@@ -27,25 +28,22 @@ const apiAgent = superagent
   .timeout(5000)
   // 请求拦截
   .use((request) => {
-    // set headers
-    const token = localStorage.getItem("token");
-    if(token) request.set('Authorization', token);
-
-    cancelPending(request);
-
+    // 多次请求时，取消上一次请求
+    removeQueue(request);
+    // 添加当前请求至queue数组
+    queue.push(request);
+    
     return request;
   })
   // 响应拉截
   .use((request) => {
     // 根据返回的状态码相应操作，如错误提示等等
     request.then(res => {
-      // console.log(res.status)
+      // 在请求完成后，自动移出队列
+      removeQueue(res.req);
     })
 
     return request;
-  })
-  .on(error => {
-    console.log(error)
   })
 
   export default {
@@ -58,7 +56,6 @@ const apiAgent = superagent
       return apiAgent
       .post(url)
       .type('json')  //json or form
-      // .query({ appId: '111' })
       .send(params)
     },
     put: (url, params) => {
