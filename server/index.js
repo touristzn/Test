@@ -47,10 +47,10 @@ if (isDev) {
   }));
 }
 
-app.use(staticServe(path.join(__dirname, '../dist')));
-app.use(views(path.join(__dirname, '../dist'), {
-  extension: 'html'
-}));
+// app.use(staticServe(path.join(__dirname, '../dist')));
+// app.use(views(path.join(__dirname, '../dist'), {
+//   extension: 'html'
+// }));
 
 //请求代理
 app.use(proxy({

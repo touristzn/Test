@@ -37,10 +37,12 @@ const apiAgent = superagent
   })
   // 响应拉截
   .use((request) => {
-    // 根据返回的状态码相应操作，如错误提示等等
     request.then(res => {
       // 在请求完成后，自动移出队列
       removeQueue(res.req);
+    }, err => {
+      // 根据返回的状态码相应操作，如错误提示等等
+      // console.log(err)
     })
 
     return request;

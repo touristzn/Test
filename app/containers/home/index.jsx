@@ -4,7 +4,7 @@ import pureRender from "pure-render-decorator"
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import Loading from '../../components/loading'
-import { fetch } from '../../request/'
+import { fetch } from '../../request/agent'
 
 /*此处的名字home对应store文件夹下index.js中创建实例时定义的名字*/
 @inject('home')
@@ -19,7 +19,7 @@ export default class extends React.Component {
     }
     
     fetch(param).then(res => {
-      console.log(res)
+      if (res) console.log(res)
     })
   }
 

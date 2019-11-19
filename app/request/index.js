@@ -8,9 +8,8 @@ const commonParams = {
   format: 'json'
 }
 
-export async function fetch(options) {
+export function fetch(options) {
   const url = '/api/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
   const data = Object.assign({}, commonParams, options)
-  const response = await apiAxios.get(url, data);
-  return response.data
+  return apiAxios.get(url, data);
 }
